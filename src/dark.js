@@ -1,5 +1,12 @@
 (function() {
 
+  /*
+
+    2021 - DARKINTAQT.COM
+
+  */
+  let csslocation = "dark.css"; // Location of the dark.css file
+
   class djsObject {
     constructor(cssclass, id) {
       this.class = cssclass;
@@ -188,7 +195,7 @@
   window.info = new InfoClass();
 
   let darkcss = document.createElement("link");
-  darkcss.href = "dark.css";
+  darkcss.href = csslocation;
   darkcss.rel = "stylesheet";
   document.head.appendChild(darkcss);
 
