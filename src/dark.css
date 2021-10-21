@@ -1,0 +1,278 @@
+:root {
+  --i1: #2076f5;
+  --i2: #2363c2;
+  --w1: #ffb13d;
+  --w2: #ffbb00;
+  --e1: #e55039;
+  --e2: #eb2f06;
+  --s1: #26de81;
+  --s2: #20bf6b;
+  --fsp: 16px;
+  --f: Arial, sans-serif;
+  --g: #d4d4d4;
+}
+
+body {
+  font-family: var(--f);
+  margin: 0;
+  font-size: var(--fsp);
+}
+
+button, input[type="submit"] {
+  border: none;
+  background: none;
+  outline: none;
+  padding: 0;
+  margin: 0;
+  cursor: pointer;
+}
+
+div, input, section {
+  margin: 0;
+  padding: 0;
+  display: block;
+  box-sizing: border-box;
+}
+
+.djs {
+  overflow: auto;
+  box-sizing: border-box;
+}
+
+.djs::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+
+/* INPUT
+
+  19.10
+
+*/
+.djs.formarea {
+  width: 100%;
+  padding: 5px;
+}
+
+.djs.formarea input[type="text"],
+.djs.formarea input[type="email"],
+.djs.formarea input[type="password"] {
+  border: none;
+  font-size: var(--fsp);
+  padding: 10px 15px;
+  width: calc(100% - 10px);
+  border-radius: 4px;
+  margin: 5px auto;
+  border: 1px solid var(--g);
+}
+
+.djs.formarea input[type="text"].multiple,
+.djs.formarea input[type="email"].multiple,
+.djs.formarea input[type="password"].multiple {
+  width: calc(50% - 10px);
+  margin: 5px 7px 5px 3px;
+  float: left;
+}
+
+.djs.formarea input[type="text"]:focus,
+.djs.formarea input[type="email"]:focus,
+.djs.formarea input[type="password"]:focus {
+  border-color: var(--i1);
+}
+
+.djs.formarea input.styled {
+  padding: 15px 15px 5px;
+}
+
+.djs.formarea label {
+  position: absolute;
+  margin: 17px;
+  color: rgba(0, 0, 0, 0.75);
+  transition: 0.15s linear;
+  font-size: var(--f);
+}
+
+/* BUTTON
+
+  19.10
+
+*/
+button.djs,
+.djs.formarea input[type="submit"],
+.djs.formarea button {
+  padding: 10px 15px;
+  border-radius: 4px;
+  background: black;
+  color: white;
+  font-size: var(--fsp);
+  border: 1px solid transparent;
+  border-color: black;
+}
+
+button.djs:not(.filled), {
+  color: black;
+  background: transparent;
+}
+
+button.djs.warning:not(.filled) {
+  color: var(--w1);
+}
+
+.djs.formarea input[type="submit"]:not(.filled),
+.djs.formarea button:not(.filled) {
+  color: white;
+  background: var(--i1);
+  border-color: var(--i2)
+}
+
+button.djs.information:not(.filled) {
+  color: var(--i1);
+}
+
+button.djs.error:not(.filled) {
+  color: var(--e1);
+}
+
+button.djs.success:not(.filled) {
+  color: var(--s1);
+}
+
+button.djs:hover,
+.djs.formarea input[type="submit"]:hover,
+.djs.formarea button:hover {
+  transition: 0.5s;
+  color: white !important;
+}
+
+button.djs.information:hover,
+.djs.formarea input[type="submit"]:hover,
+.djs.formarea button:hover {
+  background: var(--i2);
+}
+
+button.djs.success:hover {
+  background: var(--s2);
+}
+
+button.djs.error:hover {
+  background: var(--e2);
+}
+
+button.djs.warning:hover {
+  background: var(--w2);
+}
+
+button.djs:active,
+.djs.formarea input[type="submit"]:active,
+.djs.formarea button:active {
+  opacity: 0.7;
+}
+
+/* INFO
+
+  18.10
+
+*/
+.alertarea {
+  position: absolute;
+  width: 100%;
+  min-height: 0;
+  pointer-events: none;
+  z-index: 101;
+}
+
+.info {
+  pointer-events: visiblePainted;
+  border: 1px solid transparent;
+  border-radius: 4px;
+}
+
+.djs.warning {
+  background-color: var(--w1);
+  border-color: var(--w2);
+}
+
+.info.warning .ttlelement {
+  background: var(--w2);
+}
+
+.djs.success {
+  background-color: var(--s1);
+  border-color: var(--s2);
+}
+
+.info.success .ttlelement {
+  background: var(--s2);
+}
+
+.djs.error {
+  background-color: var(--e1);
+  border-color: var(--e2);
+}
+
+.info.error .ttlelement {
+  background: white;
+}
+
+.djs.information {
+  background-color: var(--i1);
+  border-color: var(--i2);
+}
+
+.info.information .ttlelement {
+  background: var(--i2);
+}
+
+.info.center {
+  width: 85%;
+  margin: 7px auto;
+}
+
+.info.right {
+  width: 30%;
+  margin: 7px 7px 7px auto;
+}
+
+.info.left {
+  width: 30%;
+  margin: 7px auto 7px 7px;
+}
+
+.info p {
+  float: left;
+  color: white;
+  text-align: justify;
+  font-size: var(--fsp);
+  font-family: var(--f);
+  width: calc(100% - 60px);
+  margin: 17px;
+}
+
+.info p a {
+  color: white;
+  font-weight: bold;
+}
+
+.info button {
+  float: right;
+  font-size: 26px;
+  margin: 8px 8px 8px 0;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+.info button::after {
+  content: "\00d7";
+}
+
+.info button:hover {
+  transition: 0.25s;
+  color: #fff;
+}
+
+.info .ttlelement {
+  height: 5px;
+  width: 100%;
+  border-radius: 3px 2px 2px 0;
+  position: relative;
+}
