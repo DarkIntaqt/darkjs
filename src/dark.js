@@ -24,6 +24,13 @@
     return "djs" + tempid;
   }
 
+  function executeAfterLoading(callback) {
+    if (document.readyState == "complete") {
+      return callback;
+    } else {
+      document.addEventListener("DOMContentLoaded", callback);
+    }
+  }
 
   /*
 
@@ -32,10 +39,6 @@
   */
 
   class InfoClass {
-    constructor(name) {
-      this.name = name;
-      document.body.prepend(new djsObject(name, name).type("section"));
-    }
     close(element) {
 
       let parent = element.parentNode;
@@ -50,6 +53,12 @@
       }
     }
     create(html, type, position, ttl) {
+      if (!this.executedbefore) {
+        this.executedbefore = true;
+        executeAfterLoading(function() {
+          document.body.prepend(new djsObject("alertarea", "alertarea").type("section"))
+        });
+      }
       let element = new djsObject("info").type("div");
 
       switch (type) {
@@ -111,7 +120,9 @@
         }, ttl * 1000);
       }
 
-      document.getElementById(this.name).appendChild(element);
+      executeAfterLoading(function() {
+        document.getElementById("alertarea").appendChild(element);
+      });
     }
   }
 
@@ -173,14 +184,15 @@
   window.INFO = 3;
   window.ALL = true;
 
+  window.form = new FormClass();
+  window.info = new InfoClass();
+
   let darkcss = document.createElement("link");
   darkcss.href = "dark.css";
   darkcss.rel = "stylesheet";
   document.head.appendChild(darkcss);
 
   document.addEventListener("DOMContentLoaded", function() {
-    window.info = new InfoClass("alertarea");
-    window.form = new FormClass();
 
     /*
 
@@ -211,7 +223,7 @@
 
 
     // test
-    form.beautify(ALL);
+
   });
 
 }())
