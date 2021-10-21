@@ -136,24 +136,30 @@
         label.style.margin = "17px";
       }
     }
-    createStyle(element) {
-      console.log(element);
-      if (element.parentNode.classList.contains("formarea")) {
-        if (!element.getAttribute("id")) {
-          this.id = randomId();
-          element.setAttribute("id", this.id);
-        } else {
-          this.id = element.getAttribute("id");
+    beautify(element) {
+      if (element == true) {
+        let elements = document.querySelectorAll(".djs.formarea input");
+        for (var i = 0; i < elements.length; i++) {
+          form.beautify(elements[i]);
         }
-        let label = document.createElement("label");
-        label.setAttribute("for", this.id);
-        label.innerHTML = element.placeholder;
-        label.setAttribute("id", this.id + "-label");
-        element.parentNode.insertBefore(label, element);
-        element.placeholder = "";
-        element.classList.add("styled");
-        element.addEventListener("focusin", form.updateIn);
-        element.addEventListener("focusout", form.updateOut);
+      } else {
+        if (element.parentNode.classList.contains("formarea") && element.type == "password", "email", "text") {
+          if (!element.getAttribute("id")) {
+            this.id = randomId();
+            element.setAttribute("id", this.id);
+          } else {
+            this.id = element.getAttribute("id");
+          }
+          let label = document.createElement("label");
+          label.setAttribute("for", this.id);
+          label.innerHTML = element.placeholder;
+          label.setAttribute("id", this.id + "-label");
+          element.parentNode.insertBefore(label, element);
+          element.placeholder = "";
+          element.classList.add("styled");
+          element.addEventListener("focusin", form.updateIn);
+          element.addEventListener("focusout", form.updateOut);
+        }
       }
     }
   }
@@ -165,7 +171,12 @@
   window.SUCCESS = 1;
   window.ERROR = 2;
   window.INFO = 3;
+  window.ALL = true;
 
+  let darkcss = document.createElement("link");
+  darkcss.href = "dark.css";
+  darkcss.rel = "stylesheet";
+  document.head.appendChild(darkcss);
 
   document.addEventListener("DOMContentLoaded", function() {
     window.info = new InfoClass("alertarea");
@@ -200,7 +211,7 @@
 
 
     // test
-    form.createStyle(document.querySelectorAll("input[type=\"email\"]")[0]);
+    form.beautify(ALL);
   });
 
 }())
