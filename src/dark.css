@@ -71,7 +71,7 @@ div, input, section {
 .djs.formarea input[type="email"].multiple,
 .djs.formarea input[type="password"].multiple {
   width: calc(50% - 10px);
-  margin: 5px 7px 5px 3px;
+  margin: 5px;
   float: left;
 }
 
@@ -91,6 +91,11 @@ div, input, section {
   color: rgba(0, 0, 0, 0.75);
   transition: 0.15s linear;
   font-size: var(--f);
+}
+
+.djs.formarea input[type="submit"],
+.djs.formarea button {
+  margin: 5px;
 }
 
 /* BUTTON
