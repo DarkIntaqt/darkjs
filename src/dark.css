@@ -59,6 +59,7 @@ div, input, section {
 .djs.formarea input[type="email"],
 .djs.formarea input[type="password"] {
   border: none;
+  outline: none;
   font-size: var(--fsp);
   padding: 10px 15px;
   width: calc(100% - 10px);
@@ -67,12 +68,20 @@ div, input, section {
   border: 1px solid var(--g);
 }
 
+.djs.formarea div.floating-input {
+  margin: 5px;
+}
+
 .djs.formarea input[type="text"].multiple,
 .djs.formarea input[type="email"].multiple,
-.djs.formarea input[type="password"].multiple {
+.djs.formarea input[type="password"].multiple,
+.djs.formarea div.floating-input.multiple {
   width: calc(50% - 10px);
-  margin: 5px;
   float: left;
+}
+
+.djs.formarea div.floating-input input {
+  margin: 0;
 }
 
 .djs.formarea input[type="text"]:focus,
@@ -87,15 +96,17 @@ div, input, section {
 
 .djs.formarea label {
   position: absolute;
-  margin: 17px;
+  margin: 13px;
   color: rgba(0, 0, 0, 0.75);
   transition: 0.15s linear;
   font-size: var(--f);
+  cursor: text;
 }
 
 .djs.formarea input[type="submit"],
 .djs.formarea button {
   margin: 5px;
+  float: left;
 }
 
 /* BUTTON

@@ -5,7 +5,7 @@
     2021 - DARKINTAQT.COM
 
   */
-  let csslocation = "dark.css"; // Location of the dark.css file
+  let csslocation = "https://darkintaqt.com/css/dark.css"; // Location of the dark.css file
 
   class djsObject {
     constructor(cssclass, id) {
@@ -144,14 +144,14 @@
       let label = document.getElementById(e.target.id + "-label");
       label.style.fontSize = "11px";
       label.style.opacity = "0.5";
-      label.style.margin = "9px 15px";
+      label.style.margin = "4px 10px";
     }
     updateOut(e) {
       let label = document.getElementById(e.target.id + "-label");
       if (e.target.value.length == 0) {
         label.style.fontSize = "var(--f)";
         label.style.opacity = "1";
-        label.style.margin = "17px";
+        label.style.margin = "13px";
       }
     }
     beautify(element) {
@@ -161,18 +161,23 @@
           form.beautify(elements[i]);
         }
       } else {
-        if (element.parentNode.classList.contains("formarea") && element.type == "password", "email", "text") {
+        if (element.parentNode.classList.contains("formarea") && (element.type === "password" || element.type === "email" || element.type === "text")) {
           if (!element.getAttribute("id")) {
             this.id = randomId();
             element.setAttribute("id", this.id);
           } else {
             this.id = element.getAttribute("id");
           }
+          let floatingdiv = new djsObject("floating-input", "djs-f-" + randomId()).type("div");
+
+          element.before(floatingdiv);
+
           let label = document.createElement("label");
           label.setAttribute("for", this.id);
           label.innerHTML = element.placeholder;
           label.setAttribute("id", this.id + "-label");
-          element.parentNode.insertBefore(label, element);
+          floatingdiv.appendChild(element);
+          floatingdiv.insertBefore(label, element);
           element.placeholder = "";
           element.classList.add("styled");
           element.addEventListener("focusin", form.updateIn);
@@ -200,7 +205,6 @@
   document.head.appendChild(darkcss);
 
   document.addEventListener("DOMContentLoaded", function() {
-
     /*
 
       STYLE FORMS
@@ -218,19 +222,18 @@
       } else {
         eid = element.getAttribute("id");
       }
-      if (elbounds.width > (bodywidth / 2)) {
+      if (elbounds.width > (bodywidth / 2) && bodywidth > 700) {
         let pattern = document.querySelectorAll("#" + eid + " input[type=\"email\"],#" + eid + " input[type=\"text\"],#" + eid + " input[type=\"password\"]");
         if (pattern.length > 1) {
           for (var i = 0; i < pattern.length; i++) {
-            pattern[i].classList.add("multiple");
+            if (pattern[i].parentNode.classList.contains("floating-input")) {
+              pattern[i].parentNode.classList.add("multiple");
+            } else {
+              pattern[i].classList.add("multiple");
+            }
           }
         }
       }
     }
-
-
-    // test
-
   });
-
 }())
