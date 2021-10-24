@@ -33,7 +33,7 @@
 
   function executeAfterLoading(callback) {
     if (document.readyState == "complete") {
-      return callback;
+      callback(document.readyState);
     } else {
       document.addEventListener("DOMContentLoaded", callback);
     }
