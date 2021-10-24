@@ -59,7 +59,7 @@
 
       }
     }
-    create(html, type, position, ttl) {
+    create(html, type = INFO, position = RIGHT, ttl = 0) {
       if (!this.executedbefore) {
         this.executedbefore = true;
         executeAfterLoading(function() {
@@ -78,31 +78,25 @@
         case 2:
           this.type = "error";
           break;
-        case 3:
-          this.type = "information";
-          break;
         default:
           this.type = "information";
       }
 
-      if (position) {
-        if (position === 0) {
-          this.position = "center";
-        }
 
-        if (position === 1) {
-          this.position = "left";
-        }
-
-        if (position === 2) {
-          this.position = "right";
-        }
-      } else {
+      if (position === 0) {
         this.position = "center";
       }
+
+      if (position === 1) {
+        this.position = "left";
+      }
+
+      if (position === 2) {
+        this.position = "right";
+      }
+
       element.classList.add(this.type);
       element.classList.add(this.position);
-
 
 
       let elementp = document.createElement("p");
