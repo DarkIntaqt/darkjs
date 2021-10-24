@@ -16,7 +16,7 @@ The script only takes the input elements that have the parent element with the c
 <input type="text" name="username" placeholder="Username">
 ```
 
-The stylesheet then directly apllys a style to all elements.
+The stylesheet then directly applys a style to all elements.
 
 ### Creating "Floating Labels"
 
