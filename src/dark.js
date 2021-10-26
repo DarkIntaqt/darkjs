@@ -134,12 +134,14 @@
   */
 
   class FormClass {
+
     updateIn(e) {
       let label = document.getElementById(e.target.id + "-label");
       label.style.fontSize = "11px";
       label.style.opacity = "0.5";
       label.style.margin = "4px 10px";
     }
+
     updateOut(e) {
       let label = document.getElementById(e.target.id + "-label");
       if (e.target.value.length == 0) {
@@ -148,9 +150,30 @@
         label.style.margin = "13px";
       }
     }
+
+    toggleDropDown(e) {
+      e.preventDefault();
+      let element = document.getElementById(e.target.id);
+      if (element.parentNode.id.substr((element.parentNode.id.length - 2), 2) == "ER") {
+        document.getElementById(element.id.split("-")[0]).childNodes[0].nodeValue = element.innerHTML;
+        document.getElementById(element.id.split("-")[0]).childNodes[2].classList.remove("visible");
+      } else {
+        if (element.childNodes[2].classList.contains("visible")) {
+          element.childNodes[2].classList.remove("visible");
+          element.childNodes[1].innerHTML = "&#9660;";
+        } else {
+          let items = element.childNodes[2].childNodes;
+          items[0].parentNode.classList.add("visible");
+          element.childNodes[1].innerHTML = "&#9650;";
+          items[0].parentNode.style.width = element.getBoundingClientRect()['width'] + "px";
+        }
+      }
+    }
+
+
     beautify(element) {
       if (element == true) {
-        let elements = document.querySelectorAll(".djs.formarea input");
+        let elements = document.querySelectorAll(".djs.formarea input, .djs.formarea select:not(.djs)");
         for (var i = 0; i < elements.length; i++) {
           form.beautify(elements[i]);
         }
@@ -177,6 +200,33 @@
           element.addEventListener("focusin", form.updateIn);
           element.addEventListener("onchange", form.updateIn);
           element.addEventListener("focusout", form.updateOut);
+        } else if (element.parentNode.classList.contains("formarea") && element.nodeName == "SELECT") {
+          element.classList.add("djs");
+
+
+          let placeholderid = randomId();
+          let placeholdelement = new djsObject("select", placeholderid).type("div");
+
+
+
+          placeholdelement.innerHTML = element[0].innerHTML + " <span class='right'>&#9660;</span>";
+          element.parentNode.insertBefore(placeholdelement, element);
+
+          let dropdownlist = new djsObject("dropdown", placeholderid + "-PLACEHOLDER").type("div");
+
+          for (var i = 0; i < element.length; i++) {
+            let dropdownelement = new djsObject("dropdown-item", placeholderid + "-el-" + i).type("div");
+
+            dropdownelement.innerHTML = element[i].innerHTML;
+            dropdownlist.appendChild(dropdownelement);
+          }
+          placeholdelement.appendChild(dropdownlist)
+          placeholdelement.addEventListener("click", form.toggleDropDown);
+          executeAfterLoading(function() {
+            if (element.classList.contains("multiple")) {
+              placeholdelement.classList.add("multiple");
+            }
+          });
         }
       }
     }
@@ -218,7 +268,7 @@
         eid = element.getAttribute("id");
       }
       if (elbounds.width > (bodywidth / 2) && bodywidth > 700) {
-        let pattern = document.querySelectorAll("#" + eid + " input[type=\"email\"],#" + eid + " input[type=\"text\"],#" + eid + " input[type=\"password\"]");
+        let pattern = document.querySelectorAll("#" + eid + " input[type=\"email\"],#" + eid + " input[type=\"text\"],#" + eid + " input[type=\"password\"], #" + eid + " select");
         if (pattern.length > 1) {
           for (var i = 0; i < pattern.length; i++) {
             if (pattern[i].parentNode.classList.contains("floating-input")) {

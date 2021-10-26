@@ -34,6 +34,10 @@ div, input, section {
   box-sizing: border-box;
 }
 
+span.right {
+  float: right;
+}
+
 .djs {
   overflow: auto;
   box-sizing: border-box;
@@ -75,7 +79,8 @@ div, input, section {
 .djs.formarea input[type="text"].multiple,
 .djs.formarea input[type="email"].multiple,
 .djs.formarea input[type="password"].multiple,
-.djs.formarea div.floating-input.multiple {
+.djs.formarea div.floating-input.multiple,
+.djs.formarea .djs.select.multiple {
   width: calc(50% - 10px);
   float: left;
 }
@@ -104,9 +109,60 @@ div, input, section {
 }
 
 .djs.formarea input[type="submit"],
-.djs.formarea button {
+.djs.formarea button,
+.djs.formarea .djs.select {
   margin: 5px;
   float: left;
+}
+
+.djs.formarea select.djs {
+  display: none;
+}
+
+.djs.formarea .djs.select {
+  width: 100%;
+  float: left;
+  background: white;
+  padding: 10px 15px;
+  border-radius: 4px;
+  color: black;
+  font-size: var(--fsp);
+  cursor: pointer;
+  border: 1px solid var(--g);
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.djs.formarea .djs.select .dropdown {
+  display: none;
+  position: absolute;
+  margin-left: -16px;
+  margin-top: 6px;
+  border: 1px solid var(--g);
+  border-top-color: transparent;
+  border-radius: 0 0 4px 4px;
+  max-height: 500px;
+  overflow-y: scroll;
+}
+
+.djs.formarea .djs.select .dropdown.visible {
+  display: block;
+}
+
+.djs.formarea .djs.select .dropdown div {
+  width: 100%;
+  background: white;
+  padding: 7px 10px;
+  border-top: 1px solid var(--g);
+  transition: 0.25s;
+}
+
+.djs.formarea .djs.select .dropdown div:hover {
+  background: var(--g);
 }
 
 /* BUTTON
@@ -124,9 +180,10 @@ button.djs,
   font-size: var(--fsp);
   border: 1px solid transparent;
   border-color: black;
+  cursor: pointer;
 }
 
-button.djs:not(.filled), {
+button.djs:not(.filled) {
   color: black;
   background: transparent;
 }
