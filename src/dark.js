@@ -157,6 +157,8 @@
       if (element.parentNode.id.substr((element.parentNode.id.length - 2), 2) == "ER") {
         document.getElementById(element.id.split("-")[0]).childNodes[0].nodeValue = element.innerHTML;
         document.getElementById(element.id.split("-")[0]).childNodes[2].classList.remove("visible");
+        document.getElementById(element.id.split("-")[0]).childNodes[1].innerHTML = "&#9660";
+        document.getElementById(document.getElementById(element.id.split("-")[0]).getAttribute("x-darkjs-for")).value = element.innerHTML;
       } else {
         if (element.childNodes[2].classList.contains("visible")) {
           element.childNodes[2].classList.remove("visible");
@@ -203,11 +205,12 @@
         } else if (element.parentNode.classList.contains("formarea") && element.nodeName == "SELECT") {
           element.classList.add("djs");
 
-
+          element.id = randomId();
           let placeholderid = randomId();
+
           let placeholdelement = new djsObject("select", placeholderid).type("div");
 
-
+          placeholdelement.setAttribute("x-darkjs-for", element.id);
 
           placeholdelement.innerHTML = element[0].innerHTML + " <span class='right'>&#9660;</span>";
           element.parentNode.insertBefore(placeholdelement, element);
