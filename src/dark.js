@@ -175,6 +175,7 @@
           element.placeholder = "";
           element.classList.add("styled");
           element.addEventListener("focusin", form.updateIn);
+          element.addEventListener("onchange", form.updateIn);
           element.addEventListener("focusout", form.updateOut);
         }
       }
@@ -230,4 +231,4 @@
       }
     }
   });
-}())
+}());
