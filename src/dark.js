@@ -31,12 +31,15 @@
     return "djs" + tempid;
   }
 
-  function executeAfterLoading(callback) {
-    if (document.readyState == "complete") {
-      callback(document.readyState);
-    } else {
-      document.addEventListener("DOMContentLoaded", callback);
+  window.executeAfterLoading = function(callb) {
+    if (document.readyState == "interactive") {
+      callb(document.readyState);
+      return true;
     }
+    document.addEventListener("DOMContentLoaded", function() {
+      callb(document.readyState);
+    });
+    return false;
   }
 
   /*
@@ -204,7 +207,6 @@
           element.addEventListener("focusout", form.updateOut);
         } else if (element.parentNode.classList.contains("formarea") && element.nodeName == "SELECT") {
           element.classList.add("djs");
-
           element.id = randomId();
           let placeholderid = randomId();
 
@@ -213,7 +215,6 @@
           placeholdelement.setAttribute("x-darkjs-for", element.id);
 
           placeholdelement.innerHTML = element[0].innerHTML + " <span class='right'>&#9660;</span>";
-          element.parentNode.insertBefore(placeholdelement, element);
 
           let dropdownlist = new djsObject("dropdown", placeholderid + "-PLACEHOLDER").type("div");
 
@@ -226,6 +227,7 @@
           placeholdelement.appendChild(dropdownlist)
           placeholdelement.addEventListener("click", form.toggleDropDown);
           executeAfterLoading(function() {
+            element.parentNode.insertBefore(placeholdelement, element);
             if (element.classList.contains("multiple")) {
               placeholdelement.classList.add("multiple");
             }
