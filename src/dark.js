@@ -160,10 +160,10 @@
         document.getElementById(element.id.split("-")[0]).childNodes[1].innerHTML = "&#9660";
         document.getElementById(document.getElementById(element.id.split("-")[0]).getAttribute("x-darkjs-for")).value = element.innerHTML;
       } else {
-        if (element.childNodes[2].classList.contains("visible")) {
+        if (element.childNodes[2].classList.contains("visible") && element.getAttribute("x-darkjs-for") != undefined) {
           element.childNodes[2].classList.remove("visible");
           element.childNodes[1].innerHTML = "&#9660;";
-        } else {
+        } else if (element.getAttribute("x-darkjs-for") != undefined) {
           let items = element.childNodes[2].childNodes;
           items[0].parentNode.classList.add("visible");
           element.childNodes[1].innerHTML = "&#9650;";
