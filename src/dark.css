@@ -150,10 +150,12 @@ span.right {
 }
 
 .djs.formarea .djs.select .dropdown.visible {
+  z-index: 500;
   display: block;
 }
 
 .djs.formarea .djs.select .dropdown div {
+  z-index: 500;
   width: 100%;
   background: white;
   padding: 7px 10px 7px 25px;

@@ -32,7 +32,7 @@
   }
 
   window.executeAfterLoading = function(callb) {
-    if (document.readyState == "interactive") {
+    if (document.readyState == "interactive" || document.readyState == "complete") {
       callb(document.readyState);
       return true;
     }
@@ -162,6 +162,15 @@
         document.getElementById(element.id.split("-")[0]).childNodes[2].classList.remove("visible");
         document.getElementById(element.id.split("-")[0]).childNodes[1].innerHTML = "&#9660";
         document.getElementById(document.getElementById(element.id.split("-")[0]).getAttribute("x-darkjs-for")).value = element.innerHTML;
+
+        // change EVENT
+        if ("createEvent" in document) {
+          var evt = document.createEvent("HTMLEvents");
+          evt.initEvent("change", false, true);
+          document.getElementById(document.getElementById(element.id.split("-")[0]).getAttribute("x-darkjs-for")).dispatchEvent(evt);
+        } else {
+          document.getElementById(document.getElementById(element.id.split("-")[0]).getAttribute("x-darkjs-for")).fireEvent("onchange");
+        }
       } else {
         if (element.childNodes[2].classList.contains("visible") && element.getAttribute("x-darkjs-for") != undefined) {
           element.childNodes[2].classList.remove("visible");
