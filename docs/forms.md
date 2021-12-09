@@ -9,7 +9,7 @@ The script only takes the input elements that have the parent element with the c
 <!-- This works: -->
 <div class="djs formarea">
   <input type="text" name="username" placeholder="Username">
-<div>
+</div>
 
 
 <!-- This won't work: -->
