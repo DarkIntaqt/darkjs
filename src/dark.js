@@ -2,7 +2,7 @@
 
   /*
 
-    2021 - DARKINTAQT.COM
+    2022 - DARKINTAQT.COM
 
   */
   let csslocation = "https://darkintaqt.com/css/dark.css"; // Location of the dark.css file
